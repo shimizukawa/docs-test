@@ -5,9 +5,9 @@
 Nginx Community Docs
 ====================
 
-    This documentation project is currently under extremely heavy development.
-    DO NOT consider anything in here production ready until this notice is
-    removed.
+.. warning:: This documentation project is currently under extremely heavy
+   development. DO NOT consider anything in here production ready until this
+   notice is removed.
 
 
 Nginx is a free, open-source, high-performance HTTP server and reverse proxy,
