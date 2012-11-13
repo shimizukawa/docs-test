@@ -3,6 +3,7 @@ Original Authors
 
 * Michael Lustfield
 * Jon Kolb
+* Martin Fjordvald
 
 Operations Team
 ===============
