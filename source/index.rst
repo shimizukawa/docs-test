@@ -29,8 +29,8 @@ Zappos, Media Temple, Heroku, RightScale, Engine Yard, and many others.
 Getting Started
 ===============
 
-Tutorial 1: Getting to terms with the basics
---------------------------------------------
+Tutorial 1: The Basics
+----------------------
 
 You can't just dive in without a clue and hope to achieve something great. Nginx
 is NOT Apache. It is not lighttpd. It is not IIS. A successful Nginx deployment
@@ -42,8 +42,19 @@ tutorial, we aim to get you through the "bare minimum" basics.
 3.  :doc:`Getting Nginx Installed<topics/tutorials/basics_installation>`
 4.  :doc:`Serving Hello World<topics/tutorials/basics_hello>`
 
-Tutorial 2: Moving on to dynamic content
-----------------------------------------
+Tutorial 2: Get Configured
+--------------------------
+
+Now that you know what's going on, you're ready to put a configuration together
+and get rocking with Nginx. Are you excited yet?
+
+1.  :doc:`The Basic Nginx Configuration<topics/tutorials/config_basic>`
+2.  :doc:`The Static Content Configuration<topics/tutorials/config_static>`
+3.  :doc:`The Dynamic Content Configuration<topics/tutorials/config_dynamic>`
+4.  :doc:`Things to Avoid at all Costs<topics/tutorials/config_pitfalls>`
+
+Tutorial 3: Dynamic Content
+---------------------------
 
 Now that you have the basics out of the way, you're ready to get something a bit
 more useful out of Nginx. After all, you probably are interested in serving more
@@ -55,17 +66,6 @@ focusses on getting you familiar with how Nginx serves dynamic content.
 3.  :doc:`Serving Python<topics/tutorials/dynamic_python>`
 4.  :doc:`Serving Ruby<topics/tutorials/dynamic_ruby>`
 5.  :doc:`Serving CGI<topics/tutorials/dynamic_cgi>`
-
-Tutorial 3: Getting configured
-------------------------------
-
-Now that you know what's going on, you're ready to put a configuration together
-and get rocking with Nginx. Are you excited yet?
-
-1.  :doc:`The Basic Nginx Configuration<topics/tutorials/config_basic>`
-2.  :doc:`The Static Content Configuration<topics/tutorials/config_static>`
-3.  :doc:`The Dynamic Content Configuration<topics/tutorials/config_dynamic>`
-4.  :doc:`Things to Avoid at all Costs<topics/tutorials/config_pitfalls>`
 
 Quick Start
 ===========
