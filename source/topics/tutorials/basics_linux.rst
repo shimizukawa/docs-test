@@ -26,7 +26,7 @@ section of the tutorial.
 CLI Basics
 ==========
 
-Having the `Minimum Basics` in place, we should be able to dive in to some
+Having the `Minimum Basics`_ in place, we should be able to dive in to some
 lightly heavier material.
 
 Stuff here....
