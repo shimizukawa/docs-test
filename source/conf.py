@@ -40,7 +40,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Nginx Community Documentation'
+project = u'Nginx'
 copyright = u'2012, Nginx Community Center'
 
 # The version info for the project you're documenting, acts as replacement for
