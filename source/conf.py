@@ -37,9 +37,9 @@ html_static_path = ['../_static']
 html_last_updated_fmt = '%b %d, %Y'
 html_use_smartypants = False
 #html_sidebars = {}
-#html_additional_pages = {
-#    '404': '404.html',
-#}
+html_additional_pages = {
+    '404': '404.html',
+}
 html_use_index = True
 html_show_sourcelink = False
 html_show_sphinx = False
