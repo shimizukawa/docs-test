@@ -267,23 +267,30 @@ Options for avoiding this are:
 * Set cgi.fix_pathinfo=0 in php.ini. This causes the PHP interpreter to only
   try the literal path given and to stop processing if the file is not found.
 * Ensure that Nginx only passes specific PHP files for execution::
+
     location ~* (file_a|file_b|file_c)\.php$ {
         fastcgi_pass backend;
         [...]
     }
+
 * Specifically disable the execution of PHP files in any directory containing
   user uploads::
+
     location /uploaddir {
         location ~ \.php$ {return 403;}
         [...]
     }
+
 * Use the `try_files` directive to filter out the problem condition::
+
     location ~* \.php$ {
         try_files $uri =404;
         fastcgi_pass backend;
         [...]
     }
+
 * Use a nested location to filter out the problem condition::
+
     location ~* \.php$ {
         location ~ \..*/.*\.php$ {return 404;}
         fastcgi_pass backend;
