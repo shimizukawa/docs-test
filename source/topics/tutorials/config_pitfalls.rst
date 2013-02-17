@@ -1,6 +1,4 @@
-.. _contents:
-
-.. _warning: Read all of this! ALL OF IT!
+.. warning:: Read all of this! ALL OF IT!
 
 Pitfalls and Common Mistakes
 ============================
