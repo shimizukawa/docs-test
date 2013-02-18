@@ -32,6 +32,17 @@ When it comes to supporting many users on many issues, community members don't
 want to support broken configurations. Fix your configuration before asking for
 help. Fix your configuration by reading through this. Don't just skim it.
 
+Chmod 777
+---------
+
+NEVER use 777. I't might be one nifty number, but even in testing it's a sign of
+having no clue what you're doing. Look at the permissions in the whole path and
+think through what's going on.
+
+To easily display all the permissions on a path, you can use::
+
+    namei -om /path/to/check
+
 Root inside Location Block
 --------------------------
 
@@ -450,14 +461,3 @@ drop HTTP headers with underscores (which are perfectly valid according to the
 HTTP standard). This is done in order to prevent ambiguities when mapping
 headers to CGI variables as both dashes and underscores are mapped to
 underscores during that process.
-
-Chmod 777
----------
-
-NEVER use 777. I't might be one nifty number, but even in testing it's a sign of
-having no clue what you're doing. Look at the permissions in the whole path and
-think through what's going on.
-
-To easily display all the permissions on a path, you can use::
-
-    namei -om /path/to/check
