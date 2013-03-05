@@ -1,57 +1,58 @@
 If Is Evil
 ==========
 
-Directive if has problems when used in location context, in some cases it
-doesn't do what you expect but something completely different instead. In some
-cases it even segfaults. It's generally a good idea to avoid it if possible.
+The if directive in nginx suffers from some weird implementation quirks that
+one needs to be aware of before they use it. The if directive is consistent,
+though, so with proper testing one can safely use it.
 
-The only 100% safe things which may be done inside if in location context are:
+Do note that nginx has other directives that are often better suited than
+using an if. Please see the Alternative Solution section.
+
+That said, there are quite a few scenarios where using the if directive is the
+only possible way to accomplish something, for instance, when checking url
+query arguments.
+
+    if ($args ~ post=140){
+        return 301 http://example.com/;
+    }
+
+The following directives are always 100% safe to use in if-in-location context:
 
 * return [...];
 * rewrite [...];
 
-Anything else may possibly cause unpredictable behaviour, including potential
-SIGSEGV.
+Anything else may possibly cause unpredictable behaviour.
 
-It is important to note that the behaviour of if is not inconsistent, given two
-identical requests it will not randomly fail on one and work on the other, with
-proper testing and understanding ifs can be used. The advice to use other
-directives where available still very much apply, though.
+If advanced logic is required within the nginx configuration then consider using
+one of the third party modules such as the lua module.
 
-There are cases where you simply cannot avoid using an if, for example if you
-need to test a variable which has no equivalent directive.::
+Alternative Solutions
+---------------------
 
-    if ($request_method = POST ) {
-        return 405;
-    }
-    if ($args ~ post=140){
-        rewrite ^ http://example.com/ permanent;
-    }
+File System Operations
+~~~~~~~~~~~~~~~~~~~~~~
 
-What to do instead
-------------------
+**Short version:** Use try_files directive.
 
-Use try_files if it suits your needs. Use the "return ..." or "rewrite ... last"
-in other cases. In some cases it's also possible to move ifs to server level
-(where it's safe as only other rewrite module directives are allowed within it).
+The ever popular check if a file or directory exist is the most popular incorrect
+usage of if. Coming from apache the if is the first thing people turn to.
 
-E.g. the following may be used to safely change location which will be used to
-process request::
+However, nginx has a directive dedicated to check for the existance of files.
+The try_files directive takes n amount of path arguments and a fallback argument.
+
+If one of the path arguments matches the internal uri is set to that and the file
+is served. Please note that location re-evaluation does not happen.
+
+If the fallback argument matches then the request is internally rewritten to that
+uri and location re-evaluation happens. It's also possible to use a named location
+as the fallback argument.
 
     location / {
-        error_page 418 = @other;
-        recursive_error_pages on;
-
-        if ($something) {
-            return 418;
-        }
-
-        # some configuration
-        [...]
+        try_files $uri $uri /index.php;
     }
 
-    location @other {
-        # some other configuration
+    location ~* \.php$ {
+        # Your typical PHP location.
         [...]
     }
 
@@ -61,15 +62,13 @@ perl, or various 3rd party modules) to do the scripting.
 Examples
 --------
 
-Here are some examples which explain why if is evil. Don't try this at home. You
-were warned.::
+Here are some examples which explain why if is unpredictable.
 
         # Here is collection of unexpectedly buggy configurations to show that
-        # if inside location is evil.
+        # if inside location is unpredictable.
 
-        # only second header will be present in response
+        # only the second header will be present in the response
         # not really bug, just how it works
-
         location /only-one-if {
             set $true 1;
 
@@ -86,7 +85,6 @@ were warned.::
 
         # request will be sent to backend without uri changed
         # to '/' due to if
-
         location /proxy-pass-uri {
             proxy_pass http://127.0.0.1:8080/;
 
@@ -98,23 +96,18 @@ were warned.::
         }
 
         # try_files wont work due to if
-
         location /if-try-files {
              try_files  /file  @fallback;
 
              set $true 1;
-
              if ($true) {
                  # nothing
              }
         }
 
-        # nginx will SIGSEGV
-
+        # nginx will crash with a segmentation fault.
         location /crash {
-
             set $true 1;
-
             if ($true) {
                 # fastcgi_pass here
                 fastcgi_pass  127.0.0.1:9000;
@@ -127,12 +120,10 @@ were warned.::
 
         # alias with captures isn't correcly inherited into implicit nested
         # location created by if
-
         location ~* ^/if-and-alias/(?<file>.*) {
             alias /tmp/$file;
 
             set $true 1;
-
             if ($true) {
                 # nothing
             }
@@ -141,12 +132,7 @@ were warned.::
 Why This Behavior Isn't a Bug
 -----------------------------
 
-Directive "if" is part of rewrite module which evaluates instructions
-imperatively. On the other hand, nginx configuration in general is declarative.
-At some point due to users demand an attempt was made to enable some non-rewrite
-directives inside "if", and this lead to situation we have now. It mostly works,
-but... see above.
-
-Looks like the only correct fix would be to disable non-rewrite directives
-inside if completely. It would break many configuration out there though, so
-wasn't done yet.
+Directive "if" is a part of the rewrite module which evaluates instructions
+imperatively. Conversely, the nginx configuration in general is declarative.
+Due to user demand, an attempt was made to enable some non-rewrite directives
+inside "if", and this lead to situation we have now. It works, but oddly.
