@@ -2,7 +2,7 @@ If Is Evil
 ==========
 
 The if directive in nginx suffers from some weird implementation quirks that
-one need to be aware of before they use it. The if directive is consistent,
+one needs to be aware of before they use it. The if directive is consistent,
 though, so with proper testing one can safely use it.
 
 Do note that nginx has other directives that are often better suited than
@@ -134,5 +134,5 @@ Why This Behavior Isn't a Bug
 
 Directive "if" is a part of the rewrite module which evaluates instructions
 imperatively. Conversely, the nginx configuration in general is declarative.
-Due to users demand an attempt was made to enable some non-rewrite directives
+Due to user demand, an attempt was made to enable some non-rewrite directives
 inside "if", and this lead to situation we have now. It works, but oddly.
