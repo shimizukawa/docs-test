@@ -12,7 +12,7 @@ That said, there are quite a few scenarios where using the if directive is the
 only possible way to accomplish something, for instance, when checking url
 query arguments.
 
-    if ($args ~ post=140){
+    if ($arg_post = 140){
         return 301 http://example.com/;
     }
 
