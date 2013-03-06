@@ -12,7 +12,7 @@ That said, there are quite a few scenarios where using the if directive is the
 only possible way to accomplish something, for instance, when checking url
 query arguments.
 
-    if ($args ~ post=140){
+    if ($arg_post = 140){
         return 301 http://example.com/;
     }
 
@@ -62,10 +62,7 @@ perl, or various 3rd party modules) to do the scripting.
 Examples
 --------
 
-Here are some examples which explain why if is unpredictable.
-
-        # Here is collection of unexpectedly buggy configurations to show that
-        # if inside location is unpredictable.
+Here are some examples which explain why if-in-location is unpredictable.
 
         # only the second header will be present in the response
         # not really bug, just how it works
