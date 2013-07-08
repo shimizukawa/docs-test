@@ -10,7 +10,7 @@ import sys
 
 extensions = []
 templates_path = ['../_templates']
-source_suffix = '.rst'
+source_suffix = '.txt'
 master_doc = 'index'
 project = u'Nginx'
 copyright = u'2012, Nginx Core Community'
