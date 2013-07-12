@@ -12,6 +12,8 @@ That said, there are quite a few scenarios where using the if directive is the
 only possible way to accomplish something, for instance, when checking url
 query arguments.
 
+.. ngx::
+
     if ($arg_post = 140){
         return 301 http://example.com/;
     }
@@ -47,13 +49,15 @@ If the fallback argument matches then the request is internally rewritten to tha
 uri and location re-evaluation happens. It's also possible to use a named location
 as the fallback argument.
 
+.. ngx::
+
     location / {
         try_files $uri $uri /index.php;
     }
 
     location ~* \.php$ {
         # Your typical PHP location.
-        [...]
+        # [...]
     }
 
 In some cases it may be good idea to use embedded scripting modules (embedded
@@ -63,6 +67,8 @@ Examples
 --------
 
 Here are some examples which explain why if-in-location is unpredictable.
+
+.. ngx:: warn
 
         # only the second header will be present in the response
         # not really bug, just how it works
@@ -126,8 +132,8 @@ Here are some examples which explain why if-in-location is unpredictable.
             }
         }
 
-Why This Behavior Isn't a Bug
------------------------------
+Why This Behavior Is Not a Bug
+------------------------------
 
 Directive "if" is a part of the rewrite module which evaluates instructions
 imperatively. Conversely, the nginx configuration in general is declarative.
