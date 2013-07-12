@@ -39,29 +39,33 @@ NEVER use 777. I't might be one nifty number, but even in testing it's a sign of
 having no clue what you're doing. Look at the permissions in the whole path and
 think through what's going on.
 
-To easily display all the permissions on a path, you can use::
+To easily display all the permissions on a path, you can use
+
+.. code-block:: text
 
     namei -om /path/to/check
 
 Root inside Location Block
 --------------------------
 
-BAD::
+BAD
+
+.. ngx:: warn
 
     server {
         server_name www.domain.com;
-          location / {
-              root /var/www/nginx-default/;
-              [...]
+        location / {
+            root /var/www/nginx-default/;
+            # [...]
           }
-          location /foo {
-              root /var/www/nginx-default/;
-              [...]
-          }
-          location /bar {
-              root /var/www/nginx-default/;
-              [...]
-          }
+        location /foo {
+            root /var/www/nginx-default/;
+            # [...]
+        }
+        location /bar {
+            root /var/www/nginx-default/;
+            # [...]
+        }
     }
 
 This works. Putting root inside of a location block will work and it's perfectly
@@ -69,26 +73,30 @@ valid. What's wrong is when you start adding location blocks. If you add a root
 to every location block then a location block that isn't matched will have no
 root. Let's look at a good configuration.
 
-GOOD::
+GOOD
+
+.. ngx::
 
     server {
         server_name www.domain.tld;
         root /var/www/nginx-default/;
         location / {
-            [...]
-      }
-      location /foo {
-          [...]
-      }
-      location /bar {
-          [...]
-      }
+            # [...]
+        }
+        location /foo {
+            # [...]
+        }
+        location /bar {
+            # [...]
+        }
     }
 
 Multiple Index Directives
 -------------------------
 
-BAD::
+BAD
+
+.. ngx:: warn
 
     http {
         index index.php index.htm index.html;
@@ -96,18 +104,18 @@ BAD::
             server_name www.domain.tld;
             location / {
                 index index.php index.htm index.html;
-                [...]
+                # [...]
             }
         }
         server {
             server_name domain.tld;
             location / {
                 index index.php index.htm index.html;
-                [...]
+                # [...]
             }
             location /foo {
                 index index.php;
-                [...]
+                # [...]
             }
         }
     }
@@ -116,23 +124,25 @@ Why repeat so many lines when not needed. Simply use the "index" directive one
 time. It only needs to occur in your http { } block and it will be inherited
 below.
 
-GOOD::
+GOOD
+
+.. ngx::
 
     http {
         index index.php index.htm index.html;
         server {
             server_name www.domain.com;
             location / {
-                [...]
+                # [...]
             }
         }
         server {
             server_name domain.com;
             location / {
-                [...]
+                # [...]
             }
             location /foo {
-                [...]
+                # [...]
             }
         }
     }
@@ -148,7 +158,9 @@ really should check it out. Let's take a look at a few uses of if that are bad.
 Server Name (If)
 ----------------
 
-BAD::
+BAD
+
+.. ngx:: warn
 
     server {
         server_name domain.tld *.domain.tld;
@@ -156,7 +168,7 @@ BAD::
                 set $raw_domain $1;
                 rewrite ^/(.*)$ $raw_domain/$1 permanent;
             }
-            [...]
+            # [...]
         }
     }
 
@@ -168,15 +180,17 @@ you're requesting nginx to check for the Host header for **every request**.
 It's extremely inefficient. You should avoid it. Instead use two server
 directives like the example below. 
 
-GOOD::
+GOOD
+
+.. ngx::
 
     server {
         server_name www.domain.com;
         return 301 $scheme://domain.com$request_uri;
     }
     server {
-          server_name domain.com;
-          [...]
+        server_name domain.com;
+        # [...]
     }
 
 Besides making the configuration file easier to read. This approach decreases
@@ -190,7 +204,9 @@ Check (If) File Exists
 Using if to ensure a file exists is horrible. It's mean. If you have any recent
 version of Nginx you should look at try_files which just made life much easier.
 
-BAD::
+BAD
+
+.. ngx:: warn
 
     server {
         root /var/www/domain.com;
@@ -201,7 +217,9 @@ BAD::
         }
     }
 
-GOOD::
+GOOD
+
+.. ngx::
 
     server {
         root /var/www/domain.com;
@@ -224,7 +242,9 @@ Front Controller Pattern Web Apps
 
 "Front Controller Pattern" designs are popular and used on the many of the most
 popular PHP software packages. A lot of examples are more complex than they need
-to be. To get Drupal, Joomla, etc. to work, just use this::
+to be. To get Drupal, Joomla, etc. to work, just use this:
+
+.. ngx::
 
     try_files $uri $uri/ /index.php?q=$uri&$args;
 
@@ -235,7 +255,9 @@ example:
 * "page" is used by CMS Made Simple
 
 Some software doesn't even need the query string, and can read from REQUEST_URI
-(WordPress supports this, for example)::
+(WordPress supports this, for example):
+
+.. ngx::
 
     try_files $uri $uri/ /index.php;
 
@@ -254,11 +276,13 @@ ending in .php to the PHP interpreter. Note that this presents a serious
 security issue on most PHP setups as it may allow arbitrary code execution by
 third parties.
 
-The problem section usually looks like this::
+The problem section usually looks like this:
+
+.. ngx::
 
     location ~* \.php$ {
         fastcgi_pass backend;
-        [...]
+        # [...]
     }
 
 Here, every request ending in .php will be passed to the FastCGI backend. The
@@ -275,35 +299,43 @@ Options for avoiding this are:
 
 * Set cgi.fix_pathinfo=0 in php.ini. This causes the PHP interpreter to only
   try the literal path given and to stop processing if the file is not found.
-* Ensure that Nginx only passes specific PHP files for execution::
+* Ensure that Nginx only passes specific PHP files for execution:
+
+.. ngx::
 
     location ~* (file_a|file_b|file_c)\.php$ {
         fastcgi_pass backend;
-        [...]
+        # [...]
     }
 
 * Specifically disable the execution of PHP files in any directory containing
-  user uploads::
+  user uploads:
+
+.. ngx::
 
     location /uploaddir {
         location ~ \.php$ {return 403;}
-        [...]
+        # [...]
     }
 
-* Use the `try_files` directive to filter out the problem condition::
+* Use the `try_files` directive to filter out the problem condition:
+
+.. ngx::
 
     location ~* \.php$ {
         try_files $uri =404;
         fastcgi_pass backend;
-        [...]
+        # [...]
     }
 
-* Use a nested location to filter out the problem condition::
+* Use a nested location to filter out the problem condition:
+
+.. ngx::
 
     location ~* \.php$ {
         location ~ \..*/.*\.php$ {return 404;}
         fastcgi_pass backend;
-        [...]
+        # [...]
     }
 
 FastCGI Path in Script Filename
@@ -315,11 +347,15 @@ repository you'll usually wind up being able to toss "include fastcgi_params;"
 in your config. This is a file located in your Nginx root directory which is
 usually around /etc/nginx/.
 
-GOOD::
+GOOD:
+
+.. ngx::
 
     fastcgi_param  SCRIPT_FILENAME    $document_root$fastcgi_script_name;
 
-BAD::
+BAD:
+
+.. ngx:: warn
 
     fastcgi_param  SCRIPT_FILENAME    /var/www/yoursite.com/$fastcgi_script_name;
 
@@ -333,15 +369,21 @@ Don't feel bad here, it's easy to get confused with regular expressions. In
 fact, it's so easy to do that we should make an effort to keep them neat and
 clean. Quite simply, don't add cruft.
 
-BAD::
+BAD:
+
+.. ngx:: warn
 
     rewrite ^/(.*)$ http://domain.com/$1 permanent;
 
-GOOD::
+GOOD:
+
+.. ngx::
 
     rewrite ^ http://domain.com$request_uri? permanent;
 
-BETTER::
+BETTER:
+
+.. ngx::
 
     return 301 http://domain.com$request_uri;
 
@@ -355,11 +397,15 @@ Rewrite Missing http://
 Very simply, rewrites are relative unless you tell nginx that they're not.
 Making a rewrite absolute is simple. Add a scheme.
 
-BAD::
+BAD:
+
+.. ngx:: warn
 
     rewrite ^ domain.com permanent;
 
-GOOD::
+GOOD:
+
+.. ngx::
 
     rewrite ^ http://domain.com permanent;
 
@@ -369,7 +415,9 @@ simple, easy, and effective.
 Proxy Everything
 ----------------
 
-BAD::
+BAD:
+
+.. ngx:: warn
 
     server {
         server_name _;
@@ -389,7 +437,9 @@ means PHP doesn't get involved at all. MUCH faster. Especially if you're serving
 a 1MB image over PHP a few thousand times versus serving it directly. Let's take
 a look at how to do that.
 
-GOOD::
+GOOD:
+
+.. ngx::
 
     server {
         server_name _;
@@ -404,7 +454,9 @@ GOOD::
         }
     }
 
-Also GOOD::
+Also GOOD:
+
+.. ngx::
 
     server {
         server_name _;
@@ -449,7 +501,9 @@ VirtualBox
 If this does not work, and you're running nginx on a virtual machine in
 VirtualBox, it may be sendfile() that is causing the trouble. Simply comment out
 the sendfile directive or set it to "off". The directive is most likely found in
-your nginx.conf file.::
+your nginx.conf file.:
+
+.. ngx::
 
     sendfile off;
 

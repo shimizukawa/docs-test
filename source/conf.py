@@ -6,9 +6,11 @@ Sphinx Documentation for Nginx
 import os
 import sys
 
+sys.path.append(os.path.abspath('../_modules'))
+
 # -- General configuration -----------------------------------------------------
 
-extensions = []
+extensions = ['ngxblock']
 templates_path = ['../_templates']
 source_suffix = '.txt'
 master_doc = 'index'
