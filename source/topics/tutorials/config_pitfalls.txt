@@ -48,7 +48,7 @@ To easily display all the permissions on a path, you can use
 Root inside Location Block
 --------------------------
 
-BAD
+BAD:
 
 .. ngx:: warn
 
@@ -73,7 +73,7 @@ valid. What's wrong is when you start adding location blocks. If you add a root
 to every location block then a location block that isn't matched will have no
 root. Let's look at a good configuration.
 
-GOOD
+GOOD:
 
 .. ngx::
 
@@ -94,7 +94,7 @@ GOOD
 Multiple Index Directives
 -------------------------
 
-BAD
+BAD:
 
 .. ngx:: warn
 
@@ -124,7 +124,7 @@ Why repeat so many lines when not needed. Simply use the "index" directive one
 time. It only needs to occur in your http { } block and it will be inherited
 below.
 
-GOOD
+GOOD:
 
 .. ngx::
 
@@ -158,7 +158,7 @@ really should check it out. Let's take a look at a few uses of if that are bad.
 Server Name (If)
 ----------------
 
-BAD
+BAD:
 
 .. ngx:: warn
 
@@ -180,7 +180,7 @@ you're requesting nginx to check for the Host header for **every request**.
 It's extremely inefficient. You should avoid it. Instead use two server
 directives like the example below. 
 
-GOOD
+GOOD:
 
 .. ngx::
 
@@ -204,7 +204,7 @@ Check (If) File Exists
 Using if to ensure a file exists is horrible. It's mean. If you have any recent
 version of Nginx you should look at try_files which just made life much easier.
 
-BAD
+BAD:
 
 .. ngx:: warn
 
@@ -217,7 +217,7 @@ BAD
         }
     }
 
-GOOD
+GOOD:
 
 .. ngx::
 
