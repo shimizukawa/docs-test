@@ -391,8 +391,8 @@ Look at the above. Then back here. Then up, and back here. OK. The first rewrite
 captures the full URI minus the first slash. By using the built-in variable
 $request_uri we can effectively avoid doing any capturing or matching at all.
 
-Rewrite Missing http://
------------------------
+Rewrite Missing ``http://``
+---------------------------
 
 Very simply, rewrites are relative unless you tell nginx that they're not.
 Making a rewrite absolute is simple. Add a scheme.
