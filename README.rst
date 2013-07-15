@@ -29,3 +29,4 @@ expected to be high quality. This means that:
 * The source is expected to conform to the rst format
 * There should be an 80 column width limit except for code blocks
 * Of course, the content should be correct and easy to follow
+* For more details, see CONTRIBUTING.rst

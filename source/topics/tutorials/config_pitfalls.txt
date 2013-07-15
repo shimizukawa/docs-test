@@ -53,7 +53,7 @@ BAD:
 .. ngx:: warn
 
     server {
-        server_name www.domain.com;
+        server_name www.domain.tld;
         location / {
             root /var/www/nginx-default/;
             # [...]
@@ -131,13 +131,13 @@ GOOD:
     http {
         index index.php index.htm index.html;
         server {
-            server_name www.domain.com;
+            server_name www.domain.tld;
             location / {
                 # [...]
             }
         }
         server {
-            server_name domain.com;
+            server_name domain.tld;
             location / {
                 # [...]
             }
@@ -175,7 +175,7 @@ BAD:
 There are actually three problems here. The first being the if. That's what we
 care about now. Why is this bad? Did you read If is Evil? When nginx receives a
 request no matter what is the subdomain being requested, be it www.domain.tld or
-just the plain domain.com this if directive is **always** evaluated. Since
+just the plain domain.tld this if directive is **always** evaluated. Since
 you're requesting nginx to check for the Host header for **every request**.
 It's extremely inefficient. You should avoid it. Instead use two server
 directives like the example below. 
@@ -185,11 +185,11 @@ GOOD:
 .. ngx::
 
     server {
-        server_name www.domain.com;
-        return 301 $scheme://domain.com$request_uri;
+        server_name www.domain.tld;
+        return 301 $scheme://domain.tld$request_uri;
     }
     server {
-        server_name domain.com;
+        server_name domain.tld;
         # [...]
     }
 
@@ -209,7 +209,7 @@ BAD:
 .. ngx:: warn
 
     server {
-        root /var/www/domain.com;
+        root /var/www/domain.tld;
         location / {
             if (!-f $request_filename) {
                 break;
@@ -222,7 +222,7 @@ GOOD:
 .. ngx::
 
     server {
-        root /var/www/domain.com;
+        root /var/www/domain.tld;
         location / {
             try_files $uri $uri/ /index.html;
         }
@@ -373,26 +373,26 @@ BAD:
 
 .. ngx:: warn
 
-    rewrite ^/(.*)$ http://domain.com/$1 permanent;
+    rewrite ^/(.*)$ http://domain.tld/$1 permanent;
 
 GOOD:
 
 .. ngx::
 
-    rewrite ^ http://domain.com$request_uri? permanent;
+    rewrite ^ http://domain.tld$request_uri? permanent;
 
 BETTER:
 
 .. ngx::
 
-    return 301 http://domain.com$request_uri;
+    return 301 http://domain.tld$request_uri;
 
 Look at the above. Then back here. Then up, and back here. OK. The first rewrite
 captures the full URI minus the first slash. By using the built-in variable
 $request_uri we can effectively avoid doing any capturing or matching at all.
 
-Rewrite Missing ``http://``
----------------------------
+Rewrite Missing :txt:`http://`
+------------------------------
 
 Very simply, rewrites are relative unless you tell nginx that they're not.
 Making a rewrite absolute is simple. Add a scheme.
@@ -401,16 +401,16 @@ BAD:
 
 .. ngx:: warn
 
-    rewrite ^ domain.com permanent;
+    rewrite ^ domain.tld permanent;
 
 GOOD:
 
 .. ngx::
 
-    rewrite ^ http://domain.com permanent;
+    rewrite ^ http://domain.tld permanent;
 
-In the above you will see that all we did was add "http://" to the rewrite. It's
-simple, easy, and effective.
+In the above you will see that all we did was add :txt:`http://` to the
+rewrite. It's simple, easy, and effective.
 
 Proxy Everything
 ----------------

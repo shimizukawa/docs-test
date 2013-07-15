@@ -10,12 +10,12 @@ sys.path.append(os.path.abspath('../_modules'))
 
 # -- General configuration -----------------------------------------------------
 
-extensions = ['ngxblock']
+extensions = ['ngxblock', 'text']
 templates_path = ['../_templates']
 source_suffix = '.txt'
 master_doc = 'index'
 project = u'Nginx'
-copyright = u'2012, Nginx Core Community'
+copyright = u'2013, Ngx Core Community'
 version = 'latest'
 release = 'latest'
 #language = None
