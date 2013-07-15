@@ -65,10 +65,12 @@ be punched, so we require that all edits keep that from happening.
 
 * Content must be useful
 * Content must conform to the standards presented in the existing documentation
+
   * One blank line between pretty much everything
   * 80 character width (except code blocks)
   * Look at http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html
   * Yes, that's generic but not hard to follow. If needed, we'll ad more here.
+
 * Content must be published under the license found in LICENSE.txt
 * All pages must be linked to in a sensible way
 
@@ -80,7 +82,7 @@ Tips to help with editing:
 The ``:txt:`` Role
 ~~~~~~~~~~~~~~~~~~
 
-You can use ``:txt:\`http://\``` to force http:// to be rendered at text
+You can use ``:txt:`http://``` to force http:// to be rendered at text
 instead of being transformed into a link. It strips formatting from any text
 within.
 
