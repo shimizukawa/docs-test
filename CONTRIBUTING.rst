@@ -6,9 +6,9 @@ How To
 
 To make a contribution to the documentation:
 
-# Fork
-# Edit
-# Pull
+1. Fork
+#. Edit
+#. Pull
 
 If it seems like too many steps, it's because we broke it down to be as easy to
 follow as possible. Once you follow the process one time, you should find it
@@ -18,9 +18,9 @@ can submit future edits from the same fork you created initially.
 Fork
 ~~~~
 
-# Log into your github account (or create one)
-# Go to https://github.com/ngx/docs
-# Click the "Fork" button in the top right
+1. Log into your github account (or create one)
+#. Go to https://github.com/ngx/docs
+#. Click the "Fork" button in the top right
 
 Edit
 ~~~~
@@ -45,14 +45,14 @@ changes, and then push the copy with 'git push' and follow the pull request. :)
 Pull
 ~~~~
 
-# Make sure these are the changes you're looking for
-# Make sure you've reviewed the Edit Requirements below
-# In the file browser (not file edit/view pages), click "Pull Request"
-# Review the changes that will be made
-# Click "Click here to create a pull request for this comparison"
-# Fill in details and review your changes
-# Click "Send pull request"
-# Wait for our review
+1. Make sure these are the changes you're looking for
+#. Make sure you've reviewed the Edit Requirements below
+#. In the file browser (not file edit/view pages), click "Pull Request"
+#. Review the changes that will be made
+#. Click "Click here to create a pull request for this comparison"
+#. Fill in details and review your changes
+#. Click "Send pull request"
+#. Wait for our review
 
 Edit Requirements
 -----------------
