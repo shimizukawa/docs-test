@@ -11,7 +11,7 @@ The Recipe
 .. ngx::
 
     server {
-        server_name domain.tld;
+        server_name example.com;
         root /var/www/alkaline;
  
         rewrite ^/admin/search/page([0-9]+)(/)?$                                    

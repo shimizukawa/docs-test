@@ -70,6 +70,7 @@ be punched, so we require that all edits keep that from happening.
   * 80 character width (except code blocks)
   * Look at http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html
   * Yes, that's generic but not hard to follow. If needed, we'll ad more here.
+  * Use example.com instead of domain.tld
 
 * Content must be published under the license found in LICENSE.txt
 * All pages must be linked to in a sensible way
@@ -94,7 +95,7 @@ If you want to create an Ngx code block, then:
     .. ngx::
 
         server {
-            server_name domain.tld;
+            server_name example.com;
             # [...]
         }
 
@@ -103,7 +104,7 @@ If you want to create a "bad" example of the code block, then use the warn flag:
     .. ngx:: warn
 
         server {
-            server_name example.com;
+            server_name micro.soft;
             # [...]
         }
 

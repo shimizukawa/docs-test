@@ -15,7 +15,7 @@ templates_path = ['../_templates']
 source_suffix = '.txt'
 master_doc = 'index'
 project = u'Nginx'
-copyright = u'2013, Ngx Core Community'
+copyright = u'2013, Ngx Community Center'
 version = 'latest'
 release = 'latest'
 #language = None
@@ -50,8 +50,8 @@ htmlhelp_basename = 'NgxDoc'
 #latex_paper_size = 'letter'
 #latex_font_size = '10pt'
 latex_documents = [
-  ('index', 'NgxDocs.tex', u'Nginx Community Documentation',
-   u'Nginx Core Community', 'manual'),
+  ('index', 'NgxDocs.tex', u'Ngx Community Documentation',
+   u'Ngx Community Center', 'manual'),
 ]
 #latex_logo = None
 #latex_use_parts = False

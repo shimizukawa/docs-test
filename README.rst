@@ -1,7 +1,7 @@
 Welcome to the Ngx Community Center Documentation
 =================================================
 
-The `Nginx Community Center`_ Documentation project hosts documentation for the
+The `Ngx Community Center`_ Documentation project hosts documentation for the
 Nginx project. It's community maintained, reviewed, and published through Git_,
 using Sphinx_, and reStructuredText_, and hosted on `Read the docs`_.
 
