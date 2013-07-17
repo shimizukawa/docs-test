@@ -126,9 +126,8 @@ goals are different and here we care strictly about the community (you).
 
 We offer additional resources if you get stuck or just get bored and want to talk.
 
-1.  :doc:`IRC Channel<topics/community/irc>`
-2.  :doc:`Nginx Planet<topics/community/planet>`
-3.  :doc:`Mailing List<topics/community/email>`
-4.  :doc:`Bug Tracking<topics/community/bugs>`
-5.  :doc:`Getting Involved<topics/community/get_involved>`
-
+1. :ref:`community-irc`
+#. :ref:`community-planet`
+#. :ref:`community-email`
+#. :ref:`community-bugs`
+#. :ref:`community-get_involved`
