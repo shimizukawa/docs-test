@@ -1,7 +1,7 @@
 Welcome to the Ngx Community Center Documentation
 =================================================
 
-The `Nginx Community Center`_ Documentation project hosts documentation for the
+The `Ngx Community Center`_ Documentation project hosts documentation for the
 Nginx project. It's community maintained, reviewed, and published through Git_,
 using Sphinx_, and reStructuredText_, and hosted on `Read the docs`_.
 
@@ -29,3 +29,4 @@ expected to be high quality. This means that:
 * The source is expected to conform to the rst format
 * There should be an 80 column width limit except for code blocks
 * Of course, the content should be correct and easy to follow
+* For more details, see CONTRIBUTING.rst

@@ -1,3 +1,5 @@
+.. _apps-drupal:
+
 Drupal
 ======
 
@@ -9,7 +11,7 @@ The Recipe
 .. ngx::
 
     server {
-        server_name domain.tld;
+        server_name example.com;
         root /var/www/drupal7; ## <-- Your only path reference.
  
         location = /favicon.ico {

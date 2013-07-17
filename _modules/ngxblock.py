@@ -46,7 +46,7 @@ class NgxCodeBlock(Directive):
     .. ngx:: <param>
     
         server {
-            server_name domain.tld;
+            server_name example.com;
             root /var/www;
         }
     

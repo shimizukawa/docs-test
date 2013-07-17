@@ -12,5 +12,5 @@ these work.
 Web Applications
 ----------------
 
-- :doc:`Alkaline<apps/alkaline>`
-- :doc:`Drupal<apps/drupal>`
+- :ref:`apps-alkaline`
+- :ref:`apps-drupal`
