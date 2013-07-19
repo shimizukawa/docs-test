@@ -1,4 +1,4 @@
-.. _community-irc-ops:
+.. _community-irc_ops:
 
 Operator Guidelines
 -------------------

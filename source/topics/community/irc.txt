@@ -81,4 +81,4 @@ have been treated wrongly, please follow these steps to reach a resolution.
   operator might be able to resolve the problem. 
 
 Before any of this, make sure you have read the :ref:`community-irc-coc`. It
-may also be helpful to take a look at our :ref:`community-irc-ops` document.
+may also be helpful to take a look at our :ref:`community-irc_ops` document.
